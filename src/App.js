@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import CryptoList from './components/cryptoList/cryptoList';
+import CoinGecko from 'coingecko-api';
+import { getData } from './reducer/reposReducer';
+
+const CoinGeckoClient = new CoinGecko();
 
 function App() {
+  let [totalVolume, setTotalVolume] = useState(null);
+
+  const state = useSelector(state => state.repos.items);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const func = async() => {
+      let data = await CoinGeckoClient.coins.markets();
+      await dispatch(getData(data))
+    };
+    func()
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <CryptoList 
+      state={state} 
+      totalVolume={totalVolume} 
+      setTotalVolume={setTotalVolume}
+      />
   );
 }
 
