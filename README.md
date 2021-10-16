@@ -1,4 +1,4 @@
-API used: coingecko.com
+API used: coingecko.com \n
 Выводит список криптовалют, их цену и общий объем.
 При клике "Count total volumes" делает запрос API, получает Total Volume и считает их, число выводится справа от кнопки.
 При клике "Generate data for upload" формирует CSV файл и открывает ссылку для скачивания, она доступна справа от кнопки.
