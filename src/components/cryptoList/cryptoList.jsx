@@ -65,6 +65,7 @@ const CryptoList = ({state, totalVolume, setTotalVolume}) => {
     { label: "Price:", key: "current_price" },
     { label: "Total Volume:", key: "total_volume" }
   ];
+  console.log(state)
 
   const countVolume = () => {
     const func = async() => {
@@ -111,7 +112,8 @@ const CryptoList = ({state, totalVolume, setTotalVolume}) => {
                   key={item.symbol}
                   name={item.name}
                   price={item.current_price}
-                  volume={item.total_volume}/>
+                  volume={item.total_volume}
+                  image={item.image}/>
       })} 
     </List>
     </div>
