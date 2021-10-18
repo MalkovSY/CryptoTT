@@ -12,8 +12,11 @@ const List = styled.ul`
   align-items: space-between;
   flex-wrap: wrap;
   list-style-type: none;
+  background-color: #a6b9f7;
+  border-radius: 5px;
+  border: 2px solid #2020e9;
   margin: 10px;
-  
+  padding: 20px;
 `;
 
 const MyButton = styled.button`
@@ -113,7 +116,8 @@ const CryptoList = ({state, totalVolume, setTotalVolume}) => {
                   name={item.name}
                   price={item.current_price}
                   volume={item.total_volume}
-                  image={item.image}/>
+                  image={item.image}
+                  symbol={item.symbol}/>
       })} 
     </List>
     </div>

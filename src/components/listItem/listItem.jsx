@@ -6,11 +6,14 @@ const Item = styled.li`
   justify-content: space-between;
   font-size: 23px;
   color: #0a0aad;
-  background-color: #f8f8f84c;
+  background-color: #fafafae2;
   border: 2px solid #460202;
   border-radius: 5px;
   padding: 10px 0;
   margin: 1px 0px;
+  :hover{
+    background-color: #c2bfbfe1;
+  }
 `;
 
 const Text = styled.span`
@@ -27,12 +30,12 @@ const MyImg = styled.img`
 `;
 
 
-const ListItem = ({name, price, volume, image}) => {
+const ListItem = ({name, price, volume, image, symbol}) => {
   return (
     <Item>
       <Text>
         <MyImg src={image} alt='logo'/>
-        {name}
+        {name} / {symbol}
       </Text>
       <Text>{price}$</Text>
       <Text>{volume}</Text>
