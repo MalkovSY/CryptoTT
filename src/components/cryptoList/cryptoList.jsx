@@ -71,14 +71,15 @@ const CryptoList = ({state, totalVolume, setTotalVolume}) => {
   console.log(state)
 
   const countVolume = () => {
+    setTotalVolume(totalVolume = 'loading...' );
     const func = async() => {
+      setTotalVolume(totalVolume = null);
       let data = await CoinGeckoClient.coins.markets();
-      setTotalVolume(totalVolume = null );
       data.data.forEach(item => {
         setTotalVolume(totalVolume += item.total_volume);
       })
     };
-    func();
+    setTimeout(() => func(), 1000);
   }
 
   const downloadResult = () => {
@@ -102,13 +103,12 @@ const CryptoList = ({state, totalVolume, setTotalVolume}) => {
           style={{marginLeft: '50px'}}
           onClick={() => downloadResult()}>
           Generate data for upload
-          
         </MyButton>
         {csvIsReady ? <CSVLink data={csvData} headers={headers}>Download CSV</CSVLink> : ''}
       </Content>
     <List>
       <div style={{display: 'flex', justifyContent: 'space-between'}}>
-        <MyDiv>Name:</MyDiv> <MyDiv>Price:</MyDiv> <MyDiv>Total Volume:</MyDiv>
+        <MyDiv>Name:</MyDiv> <MyDiv>Price:</MyDiv> <MyDiv>Total Volume:</MyDiv> <MyDiv>Market capitalization:</MyDiv>
       </div>
       {newState.map(item => {
         return <ListItem
@@ -117,7 +117,9 @@ const CryptoList = ({state, totalVolume, setTotalVolume}) => {
                   price={item.current_price}
                   volume={item.total_volume}
                   image={item.image}
-                  symbol={item.symbol}/>
+                  symbol={item.symbol}
+                  capital={item.market_cap}
+                  />
       })} 
     </List>
     </div>

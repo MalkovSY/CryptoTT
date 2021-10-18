@@ -30,7 +30,7 @@ const MyImg = styled.img`
 `;
 
 
-const ListItem = ({name, price, volume, image, symbol}) => {
+const ListItem = ({name, price, volume, image, symbol, capital}) => {
   return (
     <Item>
       <Text>
@@ -39,6 +39,7 @@ const ListItem = ({name, price, volume, image, symbol}) => {
       </Text>
       <Text>{price}$</Text>
       <Text>{volume}</Text>
+      <Text>{capital}</Text>
     </Item>
   );
 };
