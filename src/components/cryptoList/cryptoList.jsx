@@ -66,7 +66,8 @@ const CryptoList = ({state, totalVolume, setTotalVolume}) => {
   const headers = [
     { label: "Name:", key: "name" },
     { label: "Price:", key: "current_price" },
-    { label: "Total Volume:", key: "total_volume" }
+    { label: "Total Volume:", key: "total_volume" },
+    { label: "Market capitalization:", key: "market_cap" },
   ];
   console.log(state)
 

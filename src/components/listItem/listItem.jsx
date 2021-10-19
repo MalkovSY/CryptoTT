@@ -39,7 +39,7 @@ const ListItem = ({name, price, volume, image, symbol, capital}) => {
       </Text>
       <Text>{price}$</Text>
       <Text>{volume}</Text>
-      <Text>{capital}</Text>
+      <Text>{capital}$</Text>
     </Item>
   );
 };
