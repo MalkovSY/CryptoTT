@@ -1,46 +1,46 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState } from 'react';
+import InDetails from './inDetails';
+import WithoutDetails from './withoutDetails';
+import CoinGecko from 'coingecko-api';
+const CoinGeckoClient = new CoinGecko();
 
-const Item = styled.li`
-  display: flex;
-  justify-content: space-between;
-  font-size: 23px;
-  color: #0a0aad;
-  background-color: #fafafae2;
-  border: 2px solid #460202;
-  border-radius: 5px;
-  padding: 10px 0;
-  margin: 1px 0px;
-  :hover{
-    background-color: #c2bfbfe1;
+const ListItem = ({name, price, volume, image, symbol, capital, id, detailState,}) => {
+  const [active, setActive] = useState(false);
+  const [datails, setDatails] = useState(false);
+  
+  const clicked = async (e) => {
+    let detailData = await CoinGeckoClient.coins.fetch(e, {});
+    await setDatails(detailData.data)
   }
-`;
-
-const Text = styled.span`
-  display: flex;
-  color: #000;
-  min-width: 250px;
-  font-size: 23px;
-  margin-left: 5px;
-`;
-
-const MyImg = styled.img`
-  max-width: 25px;
-  margin-right: 10px;
-`;
-
-
-const ListItem = ({name, price, volume, image, symbol, capital}) => {
+  
   return (
-    <Item>
-      <Text>
-        <MyImg src={image} alt='logo'/>
-        {name} / {symbol}
-      </Text>
-      <Text>{price}$</Text>
-      <Text>{volume}</Text>
-      <Text>{capital}$</Text>
-    </Item>
+    <div>
+      {active ? 
+        <InDetails
+          image={image}
+          name={name}
+          symbol={symbol}
+          price={price}
+          volume={volume}
+          capital={capital}
+          detailState={detailState}
+          active={active}
+          setActive={setActive}
+          datails={datails}
+          /> : 
+        <WithoutDetails
+          id={id}
+          image={image}
+          name={name}
+          symbol={symbol}
+          price={price}
+          volume={volume}
+          capital={capital}
+          clicked={clicked}
+          active={active}
+          setActive={setActive}
+          />}
+    </div>
   );
 };
 

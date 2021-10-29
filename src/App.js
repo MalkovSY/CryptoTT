@@ -4,12 +4,15 @@ import CryptoList from './components/cryptoList/cryptoList';
 import CoinGecko from 'coingecko-api';
 import { getData } from './reducer/reposReducer';
 
+import './index.css';
+
 const CoinGeckoClient = new CoinGecko();
 
 function App() {
   let [totalVolume, setTotalVolume] = useState(null);
 
   const state = useSelector(state => state.repos.items);
+  const detailState = useSelector(state => state.repos.detailItems);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -18,11 +21,12 @@ function App() {
       await dispatch(getData(data))
     };
     func()
-  }, [])
+  }, [dispatch])
 
   return (
     <CryptoList 
-      state={state} 
+      state={state}
+      detailState={detailState}
       totalVolume={totalVolume} 
       setTotalVolume={setTotalVolume}
       />
